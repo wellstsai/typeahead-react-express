@@ -12,7 +12,7 @@ class Table extends React.Component {
     const { total } = this.props;
     return (
       <React.Fragment>
-        <h2>{`Results: ${total || 0}`}</h2>
+        <h2>{`Results: ${total || ''}`}</h2>
         <table>
           <TableHeader />
           <TableBody />

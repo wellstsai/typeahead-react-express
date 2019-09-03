@@ -7,7 +7,7 @@ const API_URL = 'http://openlibrary.org/search.json';
 
 app.use(express.static(path.join(__dirname, '../dist')));
 
-app.get(['/search/', '/search/:query/:page'], (req, res) => {
+app.get(['/search/', '/search/:query/:page', '/search//*'], (req, res) => {
   const query = req.params.query || '';
   const page = req.params.page || 1;
   const result = { books: [], total: null };

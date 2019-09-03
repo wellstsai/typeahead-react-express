@@ -3,8 +3,8 @@ import React from 'react';
 const TableHeader = () => (
   <thead>
     <tr>
-      <th align="left">TITLE</th>
-      <th align="left">AUTHOR</th>
+      <th>TITLE</th>
+      <th width="100%">AUTHOR</th>
     </tr>
   </thead>
 );

@@ -5,6 +5,7 @@ import store from './redux/store'
 import './index.scss';
 import Typeahead from './components/typeahead/typeahead';
 import Table from './components/table/table';
+import Loading from './components/loading/loading';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -12,6 +13,7 @@ ReactDOM.render(
       <h1>Book Search</h1>
       <Typeahead />
       <Table />
+      <Loading />
     </section>
   </Provider>,
   document.getElementById('root')

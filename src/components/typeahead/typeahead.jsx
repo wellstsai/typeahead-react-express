@@ -16,7 +16,7 @@ class Typeahead extends React.Component {
   handleChange(e) {
     const input = e.target.value;
     this.setState({ input });
-    this.props.updateBooks(input);
+    this.props.updateBooks(input, 1);
   }
 
   render() {

@@ -1,4 +1,4 @@
-import { UPDATE_BOOKS_SUCCESS, UPDATE_BOOKS_STARTED, UPDATE_BOOKS_FAILED } from './actionTypes';
+import { UPDATE_BOOKS_SUCCESS, UPDATE_BOOKS_STARTED, UPDATE_BOOKS_FAILED, UPDATE_BOOKS_CANCELED } from './actionTypes';
 import axios from 'axios';
 
 const updateBooksSuccess = data => ({
@@ -9,33 +9,43 @@ const updateBooksSuccess = data => ({
   }
 });
 
-const updateBooksStarted = () => ({
-  type: UPDATE_BOOKS_STARTED
+const updateBooksStarted = (query, page) => ({
+  type: UPDATE_BOOKS_STARTED,
+  payload: { query, page }
 });
 
-const updateBooksFailed = source => ({
-  type: UPDATE_BOOKS_FAILED,
+const updateBooksFailed = () => ({
+  type: UPDATE_BOOKS_FAILED
 });
+
+const updateBooksCanceled = () => ({
+  type: UPDATE_BOOKS_CANCELED
+})
 
 
 let cancel;
 const CancelToken = axios.CancelToken;
-export const updateBooks = query => {
+export const updateBooks = (query, page) => {
   return (dispatch, getState) => {
     const { isLoading, source } = getState();
-    const page = 1;
     if (cancel) {
       cancel();
       cancel = null;
     }
 
-    dispatch(updateBooksStarted());
+    dispatch(updateBooksStarted(query, page));
 
     axios.get(`/search/${query}/${page}`, { cancelToken: new CancelToken(function executor(c) {
         cancel = c;
       })
     })
       .then(response => dispatch(updateBooksSuccess(response.data)))
-      .catch(() => dispatch(updateBooksFailed()));
+      .catch((e) => {
+        if (axios.isCancel(e)) {
+          return dispatch(updateBooksCanceled())
+        } else {
+          return dispatch(updateBooksFailed());
+        }
+      });
   };
 };
