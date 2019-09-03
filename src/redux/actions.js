@@ -22,7 +22,9 @@ const updateBooksCanceled = () => ({
   type: UPDATE_BOOKS_CANCELED
 })
 
-
+/* 
+  Used thunk middleware to handle async requests here and cancellations
+ */
 let cancel;
 const CancelToken = axios.CancelToken;
 export const updateBooks = (query, page) => {

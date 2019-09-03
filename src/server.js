@@ -1,3 +1,11 @@
+/*
+  Created an API gateway. Although this is supposed to be a front-end challenge,
+  I felt that only sending data that is necessary to the client is an important
+  part of being a good front-end engineer. That's why the data gets adapted in
+  this layer. Also, if the API wasn't public, this gateway would also help hide 
+  API keys in the server-side code.
+ */
+
 const express = require('express');
 const axios = require('axios');
 const path = require('path');

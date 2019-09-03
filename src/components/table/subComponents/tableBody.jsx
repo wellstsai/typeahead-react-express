@@ -11,6 +11,11 @@ class TableBody extends React.PureComponent {
     this.handleScroll = debounce(this.handleScroll.bind(this), 400, { maxWait: 400 });
   }
 
+  /*
+    This prevents a bug where if you are already scrolled down but initiate a new
+    query, it will scroll back to the top of the container instead of scrolling
+    to previous position even though it's a new query.
+   */
   componentDidUpdate(prevProps) {
     if (prevProps.lastPageFetched > 1 && this.props.lastPageFetched === 1) {
       this.tbodyRef.current.scrollTo(0,0);
@@ -27,6 +32,11 @@ class TableBody extends React.PureComponent {
     }
   }
 
+  /*
+    It was important here for TableRow to be it's own component so that each row
+    is not unnecessarily re-rendered on an fetch more since the component's props
+    did not change.
+   */
   render() {
     return (
       <tbody ref={this.tbodyRef} onScroll={this.handleScroll}>
