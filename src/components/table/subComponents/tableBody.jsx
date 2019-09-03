@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import TableRow from './tableRow';
 import { updateBooks } from '../../../redux/actions'
 
-class TableBody extends React.Component {
+class TableBody extends React.PureComponent {
   constructor(props) {
     super(props);
     this.tbodyRef = React.createRef();

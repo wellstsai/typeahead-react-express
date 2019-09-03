@@ -1,12 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './style.scss';
 
 const Loading = props => {
-  if (!props.isLoading) {
+  const isLoading = useSelector(state => state.isLoading);
+
+  if (!isLoading) {
     return null;
   }
-  
+
   return (
     <div className="lds-ellipsis">
       <div></div>
@@ -17,6 +19,4 @@ const Loading = props => {
   )
 };
 
-const mapStateToProps = state => ({ isLoading: state.isLoading });
-
-export default connect(mapStateToProps)(Loading);
+export default React.memo(Loading);

@@ -9,4 +9,4 @@ const TableHeader = () => (
   </thead>
 );
 
-export default TableHeader;
+export default React.memo(TableHeader);

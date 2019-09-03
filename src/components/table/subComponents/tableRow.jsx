@@ -7,4 +7,4 @@ const TableRow = ({ title, author }) => (
   </tr>
 );
 
-export default TableRow;
+export default React.memo(TableRow);
